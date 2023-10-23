@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import status
 
-def sendSuccess(payload = {}, info = []):
+def sendSuccess(payload = {}):
     """
     Receives a payload and returns an HttpResponse status 200 with the payload
 
@@ -23,12 +23,34 @@ def sendSuccess(payload = {}, info = []):
 
 
 def sendBadRequest( payload ):
+    """
+    Receives a payload and returns an HttpResponse status 400 with the payload
+
+    args:
+        payload [dict]: Payload to response
+
+    return:
+        response: {
+            payload [dict],
+        }
+    """
     return Response({
         'payload': payload
     }, status=status.HTTP_400_BAD_REQUEST)
 
 
 def sendCreated( payload ):
+    """
+    Receives a payload and returns an HttpResponse status 201 with the payload
+
+    args:
+        payload [dict]: Payload to response
+
+    return:
+        response: {
+            payload [dict],
+        }
+    """
     return Response({
         'payload': payload
     }, status=status.HTTP_201_CREATED)

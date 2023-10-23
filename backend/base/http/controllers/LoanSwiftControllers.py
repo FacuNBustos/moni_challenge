@@ -44,6 +44,7 @@ def patchLoanSwift( request:Request, id:str ):
 
         try:
             PatchLoanSwiftHandler(command)
+            pass
         except Exception as ex:
             return sendBadRequest(ex.args[1])
             

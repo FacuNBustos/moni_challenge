@@ -22,7 +22,8 @@ def CreateLoanSwiftHandler( command:CreateLoanSwiftCommand ):
 
 
 def PatchLoanSwiftHandler( command:PatchLoanSwiftCommand ):
-    if ( command.data.values().__len__() <= 1 ):
+    changes = dict(filter(lambda item: item[1] is not "" and item[1] is not None, command.clean().items()))
+    if ( changes.__len__() <= 1 ):
         raise Exception("Handler", "No fields provided to change")
     
     loanSwiftSaved = LoanSwiftRepository.findById(command.data['id'])

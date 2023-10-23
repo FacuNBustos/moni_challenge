@@ -8,7 +8,7 @@ class LoanSwiftCommandTestCase(TestCase):
     sutDelete = DeleteLoanSwiftCommand
     sutPatch = PatchLoanSwiftCommand 
 
-    def test_HappyPatch_CreateCommand(self):
+    def test_HappyPath_CreateCommand(self):
         payload = {
             'document_number': 30546758,
             'first_name': "Francisco",
@@ -21,7 +21,7 @@ class LoanSwiftCommandTestCase(TestCase):
 
         self.assertEqual( sut.data, payload )
 
-    def test_HappyPatch_DeleteLoanSwiftCommand(self):
+    def test_HappyPath_DeleteLoanSwiftCommand(self):
         payload = {
             id: uuid4()
         }
@@ -29,7 +29,7 @@ class LoanSwiftCommandTestCase(TestCase):
 
         self.assertEqual( sut.data, payload )
         
-    def test_HappyPatch_PatchLoanSwiftCommand(self):
+    def test_HappyPath_PatchLoanSwiftCommand(self):
         payload = {
             'id': uuid4(),
             'first_name': "Francisco",

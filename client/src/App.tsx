@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/Home/HomePage";
+import LoginPage from "./pages/Login/LoginPage";
+import PrivateRoute from "./utils/PrivateRoute";
+import BackofficePage from "./pages/Backoffice/BackofficePage";
+import { useEffect, useState } from "react";
+import AuthService from "./services/AuthService";
+import LoanSwiftPage from "./pages/LoanSwift/LoanSwiftPage";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [userTokens, setUserTokens] = useState({
+    access: "",
+    refresh: "",
+    isAuthenticated: false
+  });
+
+  useEffect(() => {
+    const accessToken = window.localStorage.getItem('access')
+    const refreshToken = window.localStorage.getItem('refresh')
+    if (accessToken && refreshToken) {
+      AuthService.verify(accessToken)
+      .then(response => {
+        if (response) {
+          setUserTokens({
+            access: accessToken,
+            refresh: refreshToken,
+            isAuthenticated: true
+          })
+        }
+      })
+    }
+  }, [ userTokens.access ])
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/loanswift" element={<LoanSwiftPage />} />
+        <Route path="/login" element={<LoginPage setUserTokens={setUserTokens} />}/>
+        <Route
+          path="/backoffice"
+          element={
+            <PrivateRoute isAuthenticated={userTokens.isAuthenticated}>
+              <BackofficePage />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

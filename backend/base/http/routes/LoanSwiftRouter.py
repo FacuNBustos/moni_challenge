@@ -4,6 +4,6 @@ from ..controllers.LoanSwiftControllers import listLoanSwift, createLoanSwift, d
 urlpatterns = [
     path( "list/", listLoanSwift ),
     path( "create/", createLoanSwift ),
-    path( "path/<str:id>/", patchLoanSwift ),
+    path( "patch/<str:id>/", patchLoanSwift ),
     path( "delete/<str:id>/", deleteLoanSwift ),
 ]

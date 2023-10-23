@@ -42,6 +42,7 @@ class LoanSwiftHandlerTestCase(TestCase):
         listLoanSwiftAfterDelete = self.sutListHandler()
         self.assertEqual(listLoanSwiftAfterDelete, [])
 
+
     
     def test_HappyPath_PatchHandler(self):
         from ..application.commands.LoanSwiftCommands import PatchLoanSwiftCommand
@@ -50,10 +51,11 @@ class LoanSwiftHandlerTestCase(TestCase):
         toPatch_id = loanSwiftBeforeToChange['id']
 
         command = PatchLoanSwiftCommand({
-            'id': toPatch_id,
-            'first_name': "Pedro",
+            "id": toPatch_id,
+            "first_name": "Pedro",
             "email": "pedro@gmail.com"
         })
+        print(command.data)
         self.sutPatchHandler(command)
         loanSwiftAfterToChange = self.sutListHandler()[0]
 
@@ -62,8 +64,6 @@ class LoanSwiftHandlerTestCase(TestCase):
         self.LoanSwiftMock['email'] = "pedro@gmail.com"
 
         self.assertDictEqual( {**loanSwiftAfterToChange} , self.LoanSwiftMock )
-
-        
 
 
 

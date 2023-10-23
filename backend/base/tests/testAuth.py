@@ -15,7 +15,7 @@ class AuthTestCase(APITestCase):
 
         return super().setUp()
 
-    def test_HappyPatch_Login(self):
+    def test_HappyPath_Login(self):
 
         login_url = '/api/v1/auth/login/'
 
@@ -33,7 +33,7 @@ class AuthTestCase(APITestCase):
         self.assertIsNotNone( response.data['refresh'] )
 
     
-    def test_HappyPatch_RefreshToken(self):
+    def test_HappyPath_RefreshToken(self):
         refresh_url = '/api/v1/auth/token/refresh/'
         login_url = '/api/v1/auth/login/'
 
