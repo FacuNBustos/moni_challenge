@@ -28,3 +28,4 @@ dist-ssr
 __pycache__/
 migrations/
 moni.sqlite3
+env/

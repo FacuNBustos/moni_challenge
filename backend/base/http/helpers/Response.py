@@ -6,37 +6,33 @@ def sendSuccess(payload = {}, info = []):
     Receives a payload and returns an HttpResponse status 200 with the payload
 
     args:
-
         payload [dict]: Payload to response
-
-        info [array]: Additional information requested
 
     return:
         response: {
             payload [dict],
-            info [array]
         }
     """
 
     try:
         return Response({
-            'payload': payload,
-            'info': info
+            'payload': payload
         }, status=status.HTTP_200_OK )
     except Exception as ex:
         return
 
+
 def sendBadRequest( payload ):
     return Response({
-        'payload': payload,
-        'info': [] 
+        'payload': payload
     }, status=status.HTTP_400_BAD_REQUEST)
+
 
 def sendCreated( payload ):
     return Response({
-        'payload': payload,
-        'info': []
+        'payload': payload
     }, status=status.HTTP_201_CREATED)
+
 
 def sendInternalError( ex:Exception ):
     """

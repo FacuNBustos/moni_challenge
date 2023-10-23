@@ -3,8 +3,8 @@ from uuid import uuid4
 from ..valueObjects.Genders import Genders
 
 class LoanSwift( models.Model ):
-    id = models.UUIDField( unique=True, primary_key=True, default=uuid4 )
-    document_number = models.IntegerField()
+    id = models.UUIDField( unique=True, primary_key=True, default=uuid4, editable=False )
+    document_number = models.IntegerField( editable=False )
     first_name = models.CharField( max_length=50 )
     last_name = models.CharField( max_length=50 )
     gender = models.CharField( max_length=20, choices=Genders.choices )
